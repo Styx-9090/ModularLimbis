@@ -46,7 +46,7 @@ namespace ModularSkillScripts.Patches
 						continue;
 					}
 
-					if (supporterPassive.ClassInfo.requireIDList.Count == 1 && !supporterPassive.ClassInfo.requireIDList[0].StartsWith("Modular/"))
+					if (supporterPassive.ClassInfo.requireIDList.Count <= 0 && !supporterPassive.ClassInfo.requireIDList[0].StartsWith("Modular/"))
 					{
 						continue;
 					}
