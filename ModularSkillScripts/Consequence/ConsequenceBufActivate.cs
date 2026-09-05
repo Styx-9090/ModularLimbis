@@ -14,7 +14,7 @@ public class ConsequenceBufActivate : IModularConsequence
 		BattleUnitModel attacker = modular.GetTargetModel(circles[1]);
 
 		string bufkeyword_string = circles[2];
-		if (!Il2CppSystem.Enum.TryParse(bufkeyword_string, out BUFF_UNIQUE_KEYWORD buffUniqueKeyword)) buffUniqueKeyword = BUFF_UNIQUE_KEYWORD.Enhancement;
+		BUFF_UNIQUE_KEYWORD buffUniqueKeyword = CustomBuffs.ParseBuffUniqueKeyword(bufkeyword_string);
 		
 		int circles_length = circles.Length;
 		int activate_times = circles_length > 3 ? modular.GetNumFromParamString(circles[3]) : 1;
@@ -80,7 +80,7 @@ public class ConsequenceActivateBuffUnreliable : IModularConsequence
 		BattleUnitModel attacker = modular.GetTargetModel(circles[1]);
 		
 		string bufkeyword_string = circles[2];
-		if (!Il2CppSystem.Enum.TryParse(bufkeyword_string, out BUFF_UNIQUE_KEYWORD buffUniqueKeyword)) buffUniqueKeyword = BUFF_UNIQUE_KEYWORD.Enhancement;
+		BUFF_UNIQUE_KEYWORD buffUniqueKeyword = CustomBuffs.ParseBuffUniqueKeyword(bufkeyword_string);
 		
 		int dmg_sin = -1;
 		if (circles.Length > 3) dmg_sin = Math.Min(modular.GetNumFromParamString(circles[3]), 11);

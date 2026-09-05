@@ -15,14 +15,14 @@ public class AcquirerTimingBufIsKeyword : IModularAcquirer
 		{
 			case 0: {
 				BUFF_UNIQUE_KEYWORD buf_keyword_used = SkillScriptInitPatch.onusebuf_keyword;
-				if (!Il2CppSystem.Enum.TryParse(circles[0], out BUFF_UNIQUE_KEYWORD buf_keyword_check)) buf_keyword_check = BUFF_UNIQUE_KEYWORD.Enhancement;
+				BUFF_UNIQUE_KEYWORD buf_keyword_check = CustomBuffs.ParseBuffUniqueKeyword(circles[0]);
 		
 				if (circles[1] == "mainandsub") return bufManager.HasKeyword(buf_keyword_used, buf_keyword_check) ? 1 : 0;
 				return buf_keyword_used == buf_keyword_check ? 1 : 0;
 			}
 			case 1: {
 				BUFF_UNIQUE_KEYWORD buf_keyword_used = OnGainBuffPatches.ongainbuf_keyword;
-				if (!Il2CppSystem.Enum.TryParse(circles[0], out BUFF_UNIQUE_KEYWORD buf_keyword_check)) buf_keyword_check = BUFF_UNIQUE_KEYWORD.Enhancement;
+				BUFF_UNIQUE_KEYWORD buf_keyword_check = CustomBuffs.ParseBuffUniqueKeyword(circles[0]);
 				
 				if (circles[1] == "mainandsub") return bufManager.HasKeyword(buf_keyword_used, buf_keyword_check) ? 1 : 0;
 				return buf_keyword_used == buf_keyword_check ? 1 : 0;

@@ -20,7 +20,7 @@ public class ConsequenceDestroyBuff : IModularConsequence
         //destroybuff(Multi-Target,Mode,Count,turn,includeCantBeDispelled)
         if (!isBuffType && !isBuffCategory) //single buff destroy mode - (Multi-Target, keyword, destroyRound)
         {
-            if (!Il2CppSystem.Enum.TryParse(circles[1], out BUFF_UNIQUE_KEYWORD keyword)) keyword = BUFF_UNIQUE_KEYWORD.Enhancement;
+            BUFF_UNIQUE_KEYWORD keyword = CustomBuffs.ParseBuffUniqueKeyword(circles[1]);
             int destroyRound = modular.GetNumFromParamString(circles[2]);
             foreach (BattleUnitModel targetModel in modelList)
             {

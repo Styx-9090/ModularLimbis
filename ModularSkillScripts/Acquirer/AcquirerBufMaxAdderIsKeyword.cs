@@ -13,7 +13,7 @@ public class AcquirerBufMaxAdderIsKeyword : IModularAcquirer
 	public int ExecuteAcquirer(ModularSA modular, string section, string circledSection, string[] circles)
 	{
 		BUFF_UNIQUE_KEYWORD buf_keyword_used = BUFF_UNIQUE_KEYWORD.None;
-		if (!Il2CppSystem.Enum.TryParse(circles[0], out BUFF_UNIQUE_KEYWORD buf_keyword_check)) buf_keyword_check = BUFF_UNIQUE_KEYWORD.Enhancement;
+		BUFF_UNIQUE_KEYWORD buf_keyword_check = CustomBuffs.ParseBuffUniqueKeyword(circles[0]);
 		BattleUnitBuffManager instance = Singleton<BattleUnitBuffManager>.Instance;
 		
 		switch (mode)
