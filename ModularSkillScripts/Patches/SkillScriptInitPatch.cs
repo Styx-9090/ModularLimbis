@@ -4826,7 +4826,19 @@ public class CoroutineRunner : UnityEngine.MonoBehaviour
 				
 			}
 		}
-		
 	}
+	
+	[HarmonyPatch(typeof(StageBuffManager), nameof(StageBuffManager.CheckKeywordValid))]
+	[HarmonyPostfix]
+	private static void Postfix_StageBuffManager_CheckKeywordValid(BUFF_UNIQUE_KEYWORD keyword, ref bool __result)
+	{
+		__result = true;
+	}
+	
+	
+	
+	
+	
+	
 	
 }

@@ -1,4 +1,5 @@
 using System;
+using Il2CppSystem.Collections.Generic;
 
 namespace ModularSkillScripts.Consequence;
 
@@ -44,12 +45,26 @@ public class ConsequenceStageBuf : IModularConsequence
 		{
 			case "init": {
 				stageBufManager.AddStageBuff(keyword);
+				if (!stageBufManager.CheckStageBuff(keyword)) {
+					StageBuffModel buf_new = new(keyword, 999, 0);
+					stageBufManager._stageBuffDictionary[keyword] = buf_new;
+				}
 				BattleUnitModel unit = modular.GetTargetModel(circles[2]);
-				if (unit != null) stageBufManager.AddCandidateToKeyword(keyword, unit._instanceID);
+				if (unit != null) {
+					int instID = unit._instanceID;
+					stageBufManager.AddCandidateToKeyword(keyword, instID);
+					if (!stageBufManager._buffCandidates.ContainsKey(keyword)) {
+						List<int> candidate_list = new();
+						candidate_list.Add(instID);
+						stageBufManager._buffCandidates[keyword] = candidate_list;
+					}
+					else if (!stageBufManager._buffCandidates[keyword].Contains(instID)) {
+						stageBufManager._buffCandidates[keyword].Add(instID);
+					}
+				}
 			} break;
 			case "add": {
-				if (!stageBufManager.CheckStageBuff(keyword)) return;
-				StageBuffModel buf = stageBufManager.GetStageBuffModel<StageBuffModel>(keyword);
+				StageBuffModel buf = GetStageBufModel(stageBufManager, keyword);
 				if (buf == null) return;
 				bool is_turn = circles[2] == "turn";
 				int stack = modular.GetNumFromParamString(circles[3]);
@@ -63,8 +78,7 @@ public class ConsequenceStageBuf : IModularConsequence
 				}
 			} break;
 			case "spend": {
-				if (!stageBufManager.CheckStageBuff(keyword)) return;
-				StageBuffModel buf = stageBufManager.GetStageBuffModel<StageBuffModel>(keyword);
+				StageBuffModel buf = GetStageBufModel(stageBufManager, keyword);
 				if (buf == null) return;
 				
 				bool is_turn = circles[2] == "turn";
@@ -77,7 +91,13 @@ public class ConsequenceStageBuf : IModularConsequence
 				else buf.UseBuffTurn(unit, keyword, stack, modular.battleTiming);
 			} break;
 		}
-		
+	}
+
+	public static StageBuffModel GetStageBufModel(StageBuffManager stageBufManager, BUFF_UNIQUE_KEYWORD keyword)
+	{
+		if (stageBufManager._stageBuffDictionary == null) return null;
+		if (stageBufManager._stageBuffDictionary.TryGetValue(keyword, out StageBuffModel buf)) return buf;
+		return null;
 	}
 }
 
