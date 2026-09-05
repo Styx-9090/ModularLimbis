@@ -10,7 +10,7 @@ public class ConsequenceRetreat : IModularConsequence
 		if (battleObjectManager_inst == null) return;
 
 		var modelList = modular.GetTargetModelList(circles[0]);
-		BUFF_UNIQUE_KEYWORD buf_keyword = CustomBuffs.ParseBuffUniqueKeyword(circles[1]);
+		if (!Il2CppSystem.Enum.TryParse(circles[1], out BUFF_UNIQUE_KEYWORD buf_keyword)) buf_keyword = BUFF_UNIQUE_KEYWORD.Enhancement;
 		//if (modelList.Count < 1) continue;
 		//bool comeback = circles.Length > 1;
 

@@ -34,7 +34,7 @@ public class ConsequenceBonusDmgByBuff : IModularConsequence
 				action = modular.modsa_selfAction;
 				coin = modular.modsa_coinModel;
 			}
-			BUFF_UNIQUE_KEYWORD buffUniqueKeyword = CustomBuffs.ParseBuffUniqueKeyword(circles[8]);
+			if (!Il2CppSystem.Enum.TryParse(circles[8], out BUFF_UNIQUE_KEYWORD buffUniqueKeyword)) buffUniqueKeyword = BUFF_UNIQUE_KEYWORD.Enhancement;
 
 			foreach (BattleUnitModel targetModel in modelList)
 			{

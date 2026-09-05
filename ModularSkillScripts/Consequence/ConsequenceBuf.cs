@@ -9,7 +9,7 @@ public class ConsequenceBuf : IModularConsequence
 		var modelList = modular.GetTargetModelList(circles[0]);
 		if (modelList.Count < 1) return;
 
-		BUFF_UNIQUE_KEYWORD buf_keyword = CustomBuffs.ParseBuffUniqueKeyword(circles[1]);
+		if (!Il2CppSystem.Enum.TryParse(circles[1], out BUFF_UNIQUE_KEYWORD buf_keyword)) buf_keyword = BUFF_UNIQUE_KEYWORD.Enhancement;
 		int stack = modular.GetNumFromParamString(circles[2]);
 		int turn = modular.GetNumFromParamString(circles[3]);
 		int activeRound = modular.GetNumFromParamString(circles[4]);

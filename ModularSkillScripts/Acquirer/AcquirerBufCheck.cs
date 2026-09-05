@@ -12,7 +12,7 @@ public class AcquirerBufCheck : IModularAcquirer
 		List<BattleUnitModel> modelList = modular.GetTargetModelList(circles[0]);
 		if (modelList.Count < 1) return -1;
 
-		BUFF_UNIQUE_KEYWORD buf_keyword = CustomBuffs.ParseBuffUniqueKeyword(circles[1]);
+		if (!Il2CppSystem.Enum.TryParse(circles[1], out BUFF_UNIQUE_KEYWORD buf_keyword)) buf_keyword = BUFF_UNIQUE_KEYWORD.Enhancement;
 		BattleUnitBuffManager bufManager = Singleton<BattleUnitBuffManager>.Instance;
 		foreach (BattleUnitModel unit in modelList)
 		{

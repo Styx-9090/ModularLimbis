@@ -878,7 +878,7 @@ public class ModularSA : Il2CppSystem.Object
 		{
 			string[] circles = param.Split('$');
 			param = circles[0];
-			BUFF_UNIQUE_KEYWORD bufKeyword = CustomBuffs.ParseBuffUniqueKeyword(circles[1]);
+			if (!Il2CppSystem.Enum.TryParse(circles[1], out BUFF_UNIQUE_KEYWORD bufKeyword)) bufKeyword = BUFF_UNIQUE_KEYWORD.Enhancement;
 
 			foreach (BattleUnitModel unit in battleObjectManager.GetAliveList(bufKeyword, 0, assistance, filterFaction)) list.Add(unit);
 		}

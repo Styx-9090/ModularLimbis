@@ -25,7 +25,7 @@ public class AcquirerVisualBufCheck : IModularAcquirer
 		modelList.Add(modular.modsa_unitModel); // for now, only Self.
 		if (modelList.Count < 1) return -1;
 
-		BUFF_UNIQUE_KEYWORD buf_keyword = CustomBuffs.ParseBuffUniqueKeyword(circles[2]);
+		if (!Il2CppSystem.Enum.TryParse(circles[2], out BUFF_UNIQUE_KEYWORD buf_keyword)) buf_keyword = BUFF_UNIQUE_KEYWORD.Enhancement;
 		BattleUnitBuffManager bufManager = Singleton<BattleUnitBuffManager>.Instance;
 		foreach (BattleUnitModel unit in modelList) {
 			if (unit == null) continue;
